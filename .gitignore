@@ -1,11 +1,11 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-VENV
 *.pyc
 __pycache__
 staticfiles
 db.sqlite3
+static
 # C extensions
 *.so
 
