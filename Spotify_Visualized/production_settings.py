@@ -2,11 +2,6 @@
 from .settings import *
 import os
 
-import dj_database_url
-DATABASES = {
-    'default': dj_database_url.config()
-}
-
 # Static asset configuration
 STATIC_ROOT = os.path.join(BASE_DIR, 'static', 'static_root')
 
