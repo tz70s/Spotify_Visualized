@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tzu Chiao Yeh</title>
+    <title>Spotify Artists/Genres</title>
 
     <!-- Bootstrap -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -23,7 +23,7 @@
      <div class="container">
 
       <div class="page-header">
-        <p class="text-right">Home Stay Punk</p>
+        <p class="text-right"> <strong>Spotify</strong> Artists/Genres <strong>Data Visualization</strong></p>
       </div>
 
       <div class="row">
@@ -61,16 +61,14 @@
               {% endfor %}
             </table>
           </p>
-          <iframe src={{embed_source}} size="Compact" height="80px" frameborder="3" allowtransparency="true"></iframe>
+          
           <table class="table table-hover">
               <h4>Top tracks</h4>
-              {% for tracks in top_tracks %}
               <tr>
                   <td>
-                  {{tracks}}
+                    <iframe src={{embed_source}} width = "300px" height="380px" frameborder="0" allowtransparency="true"></iframe>
                   </td>
                 </tr>
-              {% endfor %}
             </table>
           </p>
           <p>
@@ -78,7 +76,7 @@
             <h4>Followers</h4>
                 <tr>
                   <td>
-                    <h5><strong>{{followers}}</strong></h5>
+                    <iframe src={{followers}} width="200" height="25" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
                   </td>
                 </tr>
             </table>

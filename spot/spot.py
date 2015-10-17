@@ -1,18 +1,28 @@
 import spotipy
 
-name = "tame "
+default_name = "fad"
+name = "arctic"
 
 spot = spotipy.Spotify()
 
 res = spot.search(q='artist:' + name, type='artist')
+if res['artists']['items'] == []:
+	res = spot.search(q='artist:' + default_name, type='artist')
 temp_uri = ""
+
+def get_uri():
+	if res['artists']['items'] != []:
+		return res['artists']['items'][0]['uri']
 
 def get_pics_url():
 	if res['artists']['items'] != []:
 		return res['artists']['items'][0]['images'][0]['url']
 def get_genres():
 	if res['artists']['items'] != []:
-		return res['artists']['items'][0]['genres']
+		if res['artists']['items'][0]['genres'] != []:
+			return res['artists']['items'][0]['genres']
+		else:
+			return ["No Genres Display"]
 
 def get_artist_name():
 	if res['artists']['items'] != []:
@@ -20,7 +30,7 @@ def get_artist_name():
 
 def get_followers():
 	if res['artists']['items'] != []:
-		return res['artists']['items'][0]['followers']['total']
+		return "https://embed.spotify.com/follow/1/?uri="+get_uri()+"&size=basic&theme=light"
 
 def get_top_tracks():
 	if res['artists']['items'] != []:
@@ -53,6 +63,8 @@ def get_related_artists():
 		for reart in relate_resp['artists']:
 			name_list.append(reart['name'])
 		return name_list
+
+
 
 
 
