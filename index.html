@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+
+      .node:not(:hover){
+      }
+      .ntext:not(:hover) {
+        font-family: 'Georgia', serif; margin: 0; color: #377BA8;
+      }
+
+      .link {
+          stroke: #003377;
+          stroke-width: 1px;
+          stroke-opacity: 30%;
+      }
+
+    </style>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spotify Artists/Genres</title>
+
+    <!-- Bootstrap -->
+    <link type = text/css href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    
+  </head>
+  <body>
+     <div class="container">
+
+      <div class="page-header">
+        <p class="text-right"> <strong>Spotify</strong> Artists/Genres <strong>Data Visualization</strong></p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-9">
+
+          <div class ="col-md-6">
+            <input id ="search-line" type="text" class="form-control" placeholder="Search Artists" name="search_name">
+          </div>
+            <button id="go-but" type = "submit" class="btn btn-success">
+              Go
+            </button>
+
+          <div class="displated">
+            <svg></svg>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <p>
+            <h3><div id="artist-name"></div></h3>
+          </p>
+          <p>
+            <table class="table table-hover">
+              <img id = "profile-pic" class= "img-thumbnail" alt = "Responsive image" width="80%" />
+            </table>
+          </p>
+
+          <p>
+            <table class="table table-hover">
+              <tr>
+                  <td>
+                    <div id="biography"></div>
+                  </td>
+                </tr>
+            </table>
+          </p>
+
+
+          <p>
+            <table class="table table-hover" id="genre-table">
+              <h4>Genre</h4>
+              <tr>
+                  <td>
+                  <button type="button" class="btn btn-info btn-sm">
+                    <span class = "glyphicon glyphicon-search"></span>
+                    <span id = "genre-display"></span></button>
+                  </td>
+                </tr>
+            </table>
+          </p>
+          
+          <table class="table table-hover">
+              <h4>Top tracks</h4>
+              <tr>
+                  <td>
+                    <iframe id="playlist" width = "300px" height="380px" frameborder="0" allowtransparency="true"></iframe>
+                  </td>
+                </tr>
+            </table>
+          </p>
+          <p>
+            <table class="table table-hover">
+            <h4>Followers</h4>
+                <tr>
+                  <td>
+                    <iframe id="followers" width="200" height="25" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowtransparency="true"></iframe>
+                  </td>
+                </tr>
+            </table>
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </body>
+<!--Js files-->
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+<script type="text/javascript" src="{{url_for('static', filename='js/circle.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/render.js')}}"></script>
+</html>
