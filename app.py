@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, render_template, request
 import spotipy
 import os
+import pyen
 
-app = Flask(__name__)
+en = pyen.Pyen("BKR5Y3OYAZHK5RWGC")
+app = Flask(__name__,static_folder="static")
 
-default_name = "fad"
+default_name = "vancouver sleep clinic"
 name = ""
 
 spot = spotipy.Spotify()
@@ -29,6 +31,20 @@ def defRelate():
 	res = spot.search(q='artist:' + tmpName, type='artist')
 	relate_resp = spot.artist_related_artists(res['artists']['items'][0]['uri'])
 	return jsonify(relate_resp)
+
+@app.route('/biodef')
+def defBio():
+	res = spot.search(q='artist:' + default_name, type='artist')
+	artist_uri = res['artists']['items'][0]['uri']
+	echonest_response = en.get( 'artist/profile', id = artist_uri, bucket = ['biographies'] )
+	response = {}
+	response['status'] = echonest_response['status']
+	response['artist'] = {}
+	for bio in echonest_response['artist']['biographies']:
+		if ('truncated' not in bio) or bio['truncated'] == False:
+			response['artist']['biographies'] = [bio]
+			break
+	return jsonify(response)
 
 """
 search part
@@ -55,6 +71,23 @@ def searchRelate():
 	res = spot.search(q='artist:' + tmpName, type='artist')
 	relate_resp = spot.artist_related_artists(res['artists']['items'][0]['uri'])
 	return jsonify(relate_resp)
+
+@app.route('/biosearch')
+def searchBio():
+	tmpName = request.args.get('artist')
+	res = spot.search(q='artist:' + tmpName, type='artist')
+	artist_uri = res['artists']['items'][0]['uri']
+
+	echonest_response = en.get( 'artist/profile', id = artist_uri, bucket=['biographies'])
+	response = {}
+	response['status'] = echonest_response['status']
+	response['artist'] = {}
+	for bio in echonest_response['artist']['biographies']:
+		if ('truncated' not in bio) or bio['truncated'] == False:
+			response['artist']['biographies'] = [bio]
+			break
+	return jsonify(response)
+
 
 @app.route('/')
 def index():

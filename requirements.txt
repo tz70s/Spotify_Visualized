@@ -1,8 +1,15 @@
+beautifulsoup4==4.4.1
+dj-database-url==0.3.0
+dj-static==0.0.6
+Django==1.8.5
+django-bootstrap3==6.2.2
 Flask==0.10.1
 gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
+pyechonest==9.0.0
+pyen==2.3.1
 requests==2.8.1
 spotipy==2.3.7
 static3==0.6.1
